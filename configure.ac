@@ -1,0 +1,37 @@
+AC_INIT(README)
+AC_CANONICAL_SYSTEM
+
+MAJOR_VERSION=0
+MINOR_VERSION=1
+MICRO_VERSION=0
+VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
+
+AM_INIT_AUTOMAKE(njb-sharp, $VERSION)
+
+AC_SUBST(MAJOR_VERSION)
+AC_SUBST(MINOR_VERSION)
+AC_SUBST(MICRO_VERSION)
+
+AM_MAINTAINER_MODE
+AC_PROG_CC
+AM_PROG_LIBTOOL
+
+PKG_CHECK_MODULES(NJB,
+    libnjb >= 2.2.4)
+
+AC_PATH_PROG(MONO, mono)
+if test "x$MONO" = "x"; then
+    AC_MSG_ERROR([Can not find "mono" in your PATH])
+fi
+
+AC_PATH_PROG(MCS, mcs)
+if test "x$MCS" = "x"; then
+    AC_MSG_ERROR([Can not find "mcs" in your PATH])
+fi
+
+AC_OUTPUT([
+    Makefile
+    njb-sharp.pc
+    src/Makefile
+])
+

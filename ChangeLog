@@ -1,0 +1,7 @@
+2005-10-11  Aaron Bockover  <aaron@aaronbock.net>
+	
+	* njb-sharp: Initial import to Mono SVN
+	* src/Device.cs: Device layer essentially finished
+	* src/: First code written for binding libnjbb
+	* configure.ac: Set up autotools configuration
+
