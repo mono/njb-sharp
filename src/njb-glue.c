@@ -39,3 +39,28 @@ njb_t *NJB_Glue_Get_Device(int i)
 {
     return (njb_t *)&njb_devices[i];
 }
+
+const char *NJB_Glue_Song_Frame_Get_Label(njb_songid_frame_t *frame)
+{
+    return frame->label;
+}
+
+u_int8_t NJB_Glue_Song_Frame_Get_Type(njb_songid_frame_t *frame)
+{
+    return frame->type;
+}
+
+const char *NJB_Glue_Song_Frame_Get_Data_String(njb_songid_frame_t *frame)
+{
+    return frame->data.strval;
+}
+
+u_int16_t NJB_Glue_Song_Frame_Get_Data_UInt16(njb_songid_frame_t *frame)
+{
+    return frame->data.u_int16_val;
+}
+
+u_int32_t NJB_Glue_Song_Frame_Get_Data_UInt32(njb_songid_frame_t *frame)
+{
+    return frame->data.u_int32_val;
+}
