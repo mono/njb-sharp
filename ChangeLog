@@ -1,5 +1,13 @@
 2005-10-11  Aaron Bockover  <aaron@aaronbock.net>
 
+	* configure.ac: Bump to v0.1.1
+	* src/Makefile.am: Add Song.cs/SongFrame.cs files to build
+	* src/njb-glue.c: Add glue for dealing with the njb_songid_frame_t struct
+	* src/NjbTest.cs: Print out songs on device
+	* src/SongFrame.cs: Bindings to Song Frame data type and functions
+	* src/Song.cs: Bindings to Song data type and functions
+	* src/Devicec.cs: Add Song support
+
 	* COPYING: Replaced LGPL with MIT
 
 	* njb-sharp: Initial import to Mono SVN
