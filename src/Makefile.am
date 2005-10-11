@@ -16,6 +16,8 @@ libnjbglue_la_LIBADD = $(NJB_LIBS)
 ASSEMBLY_SOURCES = \
     $(srcdir)/Discoverer.cs \
     $(srcdir)/Device.cs \
+    $(srcdir)/Song.cs \
+    $(srcdir)/SongFrame.cs \
     $(srcdir)/Global.cs \
     $(srcdir)/Utility.cs \
     $(srcdir)/Revision.cs
