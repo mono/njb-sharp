@@ -1,0 +1,66 @@
+<Type Name="Global+DebugFlags" FullName="Njb.Global+DebugFlags">
+  <TypeSignature Language="C#" Value="public enum DebugFlags" />
+  <AssemblyInfo>
+    <AssemblyName>njb-sharp</AssemblyName>
+    <AssemblyVersion>0.1.1.26824</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Members>
+    <Member MemberName="SUBTRACE">
+      <MemberSignature Language="C#" Value="SUBTRACE" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Global+DebugFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="USBCTL">
+      <MemberSignature Language="C#" Value="USBCTL" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Global+DebugFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="USBBLKLIM">
+      <MemberSignature Language="C#" Value="USBBLKLIM" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Global+DebugFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="USBBLK">
+      <MemberSignature Language="C#" Value="USBBLK" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Global+DebugFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="ALL">
+      <MemberSignature Language="C#" Value="ALL" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Global+DebugFlags</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

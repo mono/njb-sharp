@@ -1,0 +1,46 @@
+<Type Name="SongFrameType" FullName="Njb.SongFrameType">
+  <TypeSignature Language="C#" Value="public enum SongFrameType" />
+  <AssemblyInfo>
+    <AssemblyName>njb-sharp</AssemblyName>
+    <AssemblyVersion>0.1.1.26824</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Members>
+    <Member MemberName="UInt32">
+      <MemberSignature Language="C#" Value="UInt32" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.SongFrameType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="String">
+      <MemberSignature Language="C#" Value="String" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.SongFrameType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="UInt16">
+      <MemberSignature Language="C#" Value="UInt16" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.SongFrameType</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

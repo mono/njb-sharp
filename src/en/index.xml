@@ -1,0 +1,36 @@
+<Overview>
+  <Assemblies>
+    <Assembly Name="njb-sharp" Version="0.1.1.26824">
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCompany(Company="Novell, Inc")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyCopyright(Copyright="Copyright 2005 Novell, Inc.")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyDescription(Description="njb-sharp provides C# bindings to libnjb (http://libnjb.sourceforge.net)")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Reflection.AssemblyTitle(Title="njb-sharp")</AttributeName>
+        </Attribute>
+      </Attributes>
+    </Assembly>
+  </Assemblies>
+  <Remarks>njb-sharp provides C# bindings to libnjb (http://libnjb.sourceforge.net)</Remarks>
+  <Copyright>Copyright 2005 Novell, Inc."</Copyright>
+  <Types>
+    <Namespace Name="Njb">
+      <Type Name="Discoverer" />
+      <Type Name="Device" />
+      <Type Name="Song" />
+      <Type Name="SongFrame" />
+      <Type Name="Global" />
+      <Type Name="Global+DebugFlags" />
+      <Type Name="Revision" />
+      <Type Name="ForeachErrorCallback" />
+      <Type Name="SongFrameType" />
+    </Namespace>
+  </Types>
+  <Title>njb-sharp</Title>
+</Overview>
