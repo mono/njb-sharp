@@ -60,6 +60,10 @@ public class Test
             //device.Owner = "Aaron Bockover";
             Console.WriteLine(device);
 
+            foreach(Song song in device.Songs) {
+                Console.WriteLine(song);            
+            }
+
             device.Release();
             device.Close();
         }
