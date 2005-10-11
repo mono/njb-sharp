@@ -1,5 +1,11 @@
 2005-10-11  Aaron Bockover  <aaron@aaronbock.net>
 
+	* src/AssemblyInfo.cs.in: Assembly Info
+	* src/njb-sharp-docs.source: njb-sharp docs source for monodoc
+	* src/en/*: ECMA XML docs for monodoc
+	* src/Makefile.am: Build documentation
+	* configure.ac: Add checks for monodoc, output src/AssemblyInfo.cs
+
 	* configure.ac: Bump to v0.1.1
 	* src/Makefile.am: Add Song.cs/SongFrame.cs files to build
 	* src/njb-glue.c: Add glue for dealing with the njb_songid_frame_t struct
