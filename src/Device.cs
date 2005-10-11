@@ -95,6 +95,12 @@ namespace Njb
         [DllImport("libnjb")]
         private static extern int NJB_Get_SDMI_ID(IntPtr njb, IntPtr smdiid);
             
+        [DllImport("libnjb")]
+        private static extern void NJB_Reset_Get_Track_Tag(IntPtr njb);
+        
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Get_Track_Tag(IntPtr njb);
+            
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Get_Device(int index);
 
@@ -294,6 +300,35 @@ namespace Njb
                 
                 return idstr;
             }
+        }
+        
+        private Song [] songs;
+        
+        public Song [] Songs
+        {
+            get {
+                if(songs != null) {
+                    return songs;
+                }
+                
+                ArrayList list = new ArrayList();
+                IntPtr songPtr = IntPtr.Zero;
+                
+                NJB_Reset_Get_Track_Tag(Handle);
+                
+                while((songPtr = NJB_Get_Track_Tag(Handle)) 
+                    != IntPtr.Zero) {
+                    list.Add(new Song(songPtr));
+                }
+                
+                return list.ToArray(typeof(Song)) as Song []; 
+            }
+        }
+        
+        public Song [] ReloadSongs()
+        {
+            songs = null;
+            return Songs;
         }
         
         public string NextError
