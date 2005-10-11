@@ -67,7 +67,7 @@ namespace Njb
 
         }
 
-        public IntPtr ArrayHandle
+        internal IntPtr ArrayHandle
         {
             get {
                 return njbs;

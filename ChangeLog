@@ -1,5 +1,7 @@
 2005-10-11  Aaron Bockover  <aaron@aaronbock.net>
 
+	* src/Discoverer.cs: Make ArrayHandle internal
+
 	* src/AssemblyInfo.cs.in: Assembly Info
 	* src/njb-sharp-docs.source: njb-sharp docs source for monodoc
 	* src/en/*: ECMA XML docs for monodoc
