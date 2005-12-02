@@ -3,6 +3,7 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 Libraries=@prefix@/lib/njb-sharp/njb-sharp.dll
+LibraryBase=@prefix@/lib/njb-sharp/
 
 Name: njb-sharp
 Description: njb-sharp - Mono/C# Bindings to libnjb

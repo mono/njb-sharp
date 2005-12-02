@@ -1,5 +1,6 @@
 2005-12-01  Aaron Bockover  <aaron@aaronbock.net>
 
+	* njb-sharp.pc.in: Added a LibraryBase variable
 	* configure.ac: Fixed typo in detecting MONODOCER, bumped to version 0.2
 	* src/Makefile.am: Added DataFile.cs, link against Mono.Posix.dll
 	* njb-sharp.md[sp]: MonoDevelop solution/project file
