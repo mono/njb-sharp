@@ -28,14 +28,26 @@
  */
  
 using System;
+using System.IO;
 using System.Collections;
 using System.Runtime.InteropServices;
+using Mono.Unix;
 
 namespace Njb
 {
     public delegate void ForeachErrorCallback(string error);
+    public delegate void TransferProgressHandler(object o, TransferProgressArgs args);
     
-    public class Device
+    public class TransferProgressArgs : EventArgs
+    {
+        public Song Song;
+        public ulong Current;
+        public ulong Total;
+    }
+    
+    internal delegate void NjbXferCallback(ulong sent, ulong total, IntPtr buf, uint len, IntPtr data);
+
+    public class Device : IDisposable
     {
         private Discoverer discoverer;
         private int index;
@@ -65,8 +77,7 @@ namespace Njb
         private static extern IntPtr NJB_Get_Owner_String(IntPtr njb);
         
         [DllImport("libnjb")]
-        private static extern int NJB_Set_Owner_String(IntPtr njb, 
-            IntPtr strPtr);
+        private static extern int NJB_Set_Owner_String(IntPtr njb, IntPtr strPtr);
         
         [DllImport("libnjb")]
         private static extern IntPtr NJB_Get_Device_Name(IntPtr njb, int type);
@@ -100,9 +111,21 @@ namespace Njb
         
         [DllImport("libnjb")]
         private static extern IntPtr NJB_Get_Track_Tag(IntPtr njb);
-            
+        
+        [DllImport("libnjb")]
+        private static extern void NJB_Reset_Get_Datafile_Tag(IntPtr njb);
+        
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Get_Datafile_Tag(IntPtr njb);
+
+        [DllImport("libnjb")]
+        private static extern int NJB_Get_Track_fd(IntPtr njb, uint trackid, uint size, int fd, 
+            NjbXferCallback cb, IntPtr data);
+
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Get_Device(int index);
+
+        public event TransferProgressHandler ReadProgressChanged;
 
         public Device(Discoverer discoverer, int index)
         {
@@ -115,7 +138,7 @@ namespace Njb
             return NJB_Open(Handle) != -1;
         }
 
-        public void Close()
+        public void Dispose()
         {
             NJB_Close(Handle);
         }
@@ -144,45 +167,39 @@ namespace Njb
             }
         }
 
-        public IntPtr Handle
-        {
+        internal IntPtr Handle {
             get {
                 return NJB_Glue_Get_Device(index);
             }
         }
 
-        public int Index
-        {
+        public int Index {
             get {
                 return index;
             }
         }
 
-        public Discoverer Discoverer
-        {
+        public Discoverer Discoverer {
             get {
                 return discoverer;
             }
         }
 
-        public string Name
-        {
+        public string Name {
             get {
                 IntPtr ptr = NJB_Get_Device_Name(Handle, 0);
                 return Utility.PtrToUtf8String(ptr);
             }
         }
         
-        public string UsbName
-        {
+        public string UsbName {
             get {
                 IntPtr ptr = NJB_Get_Device_Name(Handle, 1);
                 return Utility.PtrToUtf8String(ptr);
             }
         }
 
-        public string Owner
-        {
+        public string Owner {
             get {
                 IntPtr ptr = NJB_Get_Owner_String(Handle);
                 return Utility.PtrToUtf8String(ptr);
@@ -199,29 +216,25 @@ namespace Njb
             }
         }
 
-        public int BatteryLevel
-        {
+        public int BatteryLevel {
             get {
                 return NJB_Get_Battery_Level(Handle);
             }
         }
         
-        public bool BatteryCharging
-        {
+        public bool IsBatteryCharging {
             get {
                 return NJB_Get_Battery_Charging(Handle) == 1;
             }
         }
         
-        public bool AuxilaryPower
-        {
+        public bool AuxilaryPower {
             get {
                 return NJB_Get_Auxpower(Handle) == 1;
             }
         }
         
-        public ulong DiskFree
-        {
+        public ulong DiskFree {
             get {
                 ulong total, free;
                 GetDiskUsage(out total, out free);
@@ -229,8 +242,7 @@ namespace Njb
             }
         }
         
-        public ulong DiskTotal
-        {
+        public ulong DiskTotal {
             get {
                 ulong total, free;
                 GetDiskUsage(out total, out free);
@@ -238,13 +250,11 @@ namespace Njb
             }
         }
         
-        public Revision FirmwareRevision
-        {
+        public Revision FirmwareRevision {
             get {
                 Revision rev = new Revision();
                 
-                if(NJB_Get_Firmware_Revision(Handle, out rev.Major,
-                    out rev.Minor, out rev.Release) == 0) {
+                if(NJB_Get_Firmware_Revision(Handle, out rev.Major, out rev.Minor, out rev.Release) == 0) {
                     return rev;
                 }
                 
@@ -252,13 +262,11 @@ namespace Njb
             }
         }
         
-        public Revision HardwareRevision
-        {
+        public Revision HardwareRevision {
             get {
                 Revision rev = new Revision();
                 
-                if(NJB_Get_Hardware_Revision(Handle, out rev.Major,
-                    out rev.Minor, out rev.Release) == 0) {
+                if(NJB_Get_Hardware_Revision(Handle, out rev.Major, out rev.Minor, out rev.Release) == 0) {
                     return rev;
                 }
                 
@@ -266,8 +274,7 @@ namespace Njb
             }
         } 
         
-        public byte [] SdmiId 
-        {
+        public byte [] SdmiId {
             get {
                 IntPtr memalloc = Marshal.AllocHGlobal(16);
                 
@@ -288,8 +295,7 @@ namespace Njb
             }
         }
         
-        public string SdmiIdString
-        {
+        public string SdmiIdString {
             get {
                 string idstr = String.Empty;
                 byte [] id = SdmiId;
@@ -302,22 +308,14 @@ namespace Njb
             }
         }
         
-        private Song [] songs;
-        
-        public Song [] Songs
-        {
+        public Song [] Songs {
             get {
-                if(songs != null) {
-                    return songs;
-                }
-                
                 ArrayList list = new ArrayList();
                 IntPtr songPtr = IntPtr.Zero;
                 
                 NJB_Reset_Get_Track_Tag(Handle);
                 
-                while((songPtr = NJB_Get_Track_Tag(Handle)) 
-                    != IntPtr.Zero) {
+                while((songPtr = NJB_Get_Track_Tag(Handle)) != IntPtr.Zero) {
                     list.Add(new Song(songPtr));
                 }
                 
@@ -325,14 +323,47 @@ namespace Njb
             }
         }
         
-        public Song [] ReloadSongs()
+        public void ReadSong(Song song, string path)
         {
-            songs = null;
-            return Songs;
+            UnixStream stream = (new UnixFileInfo(path)).Open(FileMode.Create, FileAccess.ReadWrite, 
+                Mono.Unix.Native.FilePermissions.S_IWUSR | 
+                Mono.Unix.Native.FilePermissions.S_IRUSR | 
+                Mono.Unix.Native.FilePermissions.S_IRGRP | 
+                Mono.Unix.Native.FilePermissions.S_IROTH);
+                
+            if(NJB_Get_Track_fd(Handle, (uint)song.Id, song.FileSize, 
+                stream.Handle, delegate(ulong sent, ulong total, IntPtr buf, uint len, IntPtr data) {
+                    if(ReadProgressChanged != null) {
+                        TransferProgressArgs args = new TransferProgressArgs();
+                        args.Current = sent;
+                        args.Total = total;
+                        args.Song = song;
+                        ReadProgressChanged(this, args);
+                    }
+                }, IntPtr.Zero) == -1) {
+                stream.Close();
+                throw new ApplicationException("Error reading song");
+            }
+            
+            stream.Close();
         }
         
-        public string NextError
-        {
+        public DataFile [] DataFiles {
+            get {
+                ArrayList list = new ArrayList();
+                IntPtr df_ptr = IntPtr.Zero;
+                
+                NJB_Reset_Get_Datafile_Tag(Handle);
+                
+                while((df_ptr = NJB_Get_Datafile_Tag(Handle)) != IntPtr.Zero) {
+                    list.Add(new DataFile(df_ptr));
+                }
+                
+                return list.ToArray(typeof(DataFile)) as DataFile [];
+           }
+       }
+        
+        public string NextError {
             get {
                 IntPtr ptr = NJB_Error_Geterror(Handle);
                 if(ptr == IntPtr.Zero) {
@@ -349,15 +380,13 @@ namespace Njb
             }
         }
 
-        public bool IsErrorPending
-        {
+        public bool IsErrorPending {
             get {
                 return NJB_Error_Pending(Handle) != 0;
             }
         }
 
-        public string [] ErrorsPending
-        {
+        public string [] ErrorsPending {
             get {
                 if(!IsErrorPending) {
                     return null;
@@ -393,7 +422,7 @@ namespace Njb
             text.AppendFormat("USB Name:          {0}\n", UsbName);
             text.AppendFormat("Owner:             {0}\n", Owner);
             text.AppendFormat("Battery Level:     {0}%\n", BatteryLevel);
-            text.AppendFormat("Battery Charging:  {0}\n", BatteryCharging ? "YES" : "NO");
+            text.AppendFormat("Battery Charging:  {0}\n", IsBatteryCharging ? "YES" : "NO");
             text.AppendFormat("Aux. Power:        {0}\n", AuxilaryPower ? "YES" : "NO");
             text.AppendFormat("Disk Total:        {0}\n", DiskTotal);
             text.AppendFormat("Disk Free:         {0}\n", DiskFree);

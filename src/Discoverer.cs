@@ -33,11 +33,10 @@ using System.Runtime.InteropServices;
 
 namespace Njb
 {
-    public class Discoverer : IDisposable, IEnumerable
+    public class Discoverer : IEnumerable
     {
         [DllImport("libnjb")]
-        private static extern int NJB_Discover(IntPtr njbs, int limit,
-            out int count);
+        private static extern int NJB_Discover(IntPtr njbs, int limit, out int count);
 
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Get_Device_Array();
@@ -62,20 +61,13 @@ namespace Njb
             }
         }
 
-        public void Dispose()
-        {
-
-        }
-
-        internal IntPtr ArrayHandle
-        {
+        internal IntPtr ArrayHandle {
             get {
                 return njbs;
             }
         }
 
-        public Device this[int i]
-        {
+        public Device this [int i] {
             get {
                 return devices[i];
             }

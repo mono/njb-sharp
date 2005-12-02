@@ -1,13 +1,17 @@
 <Type Name="Device" FullName="Njb.Device">
-  <TypeSignature Language="C#" Value="public class Device" />
+  <TypeSignature Language="C#" Value="public class Device : System.IDisposable" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
-    <AssemblyVersion>0.1.1.26824</AssemblyVersion>
+    <AssemblyVersion>0.2.0.40905</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Device (Njb.Discoverer discoverer, int index);" />
@@ -33,18 +37,6 @@
       <Docs>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Close">
-      <MemberSignature Language="C#" Value="public void Close ();" />
-      <MemberType>Method</MemberType>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -103,19 +95,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ReloadSongs">
-      <MemberSignature Language="C#" Value="public Njb.Song[] ReloadSongs ();" />
-      <MemberType>Method</MemberType>
-      <ReturnValue>
-        <ReturnType>Njb.Song[]</ReturnType>
-      </ReturnValue>
-      <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="ForeachError">
       <MemberSignature Language="C#" Value="public void ForeachError (Njb.ForeachErrorCallback callback);" />
       <MemberType>Method</MemberType>
@@ -128,18 +107,6 @@
       <Docs>
         <param name="callback">To be added.</param>
         <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Handle">
-      <MemberSignature Language="C#" Value="public IntPtr Handle { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.IntPtr</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -208,18 +175,6 @@
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="BatteryCharging">
-      <MemberSignature Language="C#" Value="public bool BatteryCharging { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -352,6 +307,70 @@
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.String[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReadProgressChanged">
+      <MemberSignature Language="C#" Value="public event Njb.TransferProgressHandler ReadProgressChanged;" />
+      <MemberType>Event</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.TransferProgressHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ReadSong">
+      <MemberSignature Language="C#" Value="public void ReadSong (Njb.Song song, string path);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="song" Type="Njb.Song" />
+        <Parameter Name="path" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="song">To be added.</param>
+        <param name="path">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsBatteryCharging">
+      <MemberSignature Language="C#" Value="public bool IsBatteryCharging { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DataFiles">
+      <MemberSignature Language="C#" Value="public Njb.DataFile[] DataFiles { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.DataFile[]</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>

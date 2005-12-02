@@ -1,16 +1,16 @@
-<Type Name="Revision" FullName="Njb.Revision">
-  <TypeSignature Language="C#" Value="public class Revision" />
+<Type Name="TransferProgressArgs" FullName="Njb.TransferProgressArgs">
+  <TypeSignature Language="C#" Value="public class TransferProgressArgs : System.EventArgs" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
     <AssemblyVersion>0.2.0.40905</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>System.Object</BaseTypeName>
+    <BaseTypeName>System.EventArgs</BaseTypeName>
   </Base>
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Revision ();" />
+      <MemberSignature Language="C#" Value="public TransferProgressArgs ();" />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -18,33 +18,33 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Major">
-      <MemberSignature Language="C#" Value="public byte Major;" />
+    <Member MemberName="Song">
+      <MemberSignature Language="C#" Value="public Njb.Song Song;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>System.Byte</ReturnType>
+        <ReturnType>Njb.Song</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Minor">
-      <MemberSignature Language="C#" Value="public byte Minor;" />
+    <Member MemberName="Current">
+      <MemberSignature Language="C#" Value="public ulong Current;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>System.Byte</ReturnType>
+        <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Release">
-      <MemberSignature Language="C#" Value="public byte Release;" />
+    <Member MemberName="Total">
+      <MemberSignature Language="C#" Value="public ulong Total;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>System.Byte</ReturnType>
+        <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>

@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 
 namespace Njb
 {
-    public class Global
+    public static class Global
     {
         [DllImport("libnjb")]
         private static extern void NJB_Set_Debug(int debug_flags);
@@ -48,15 +48,13 @@ namespace Njb
             ALL = 1 | 2 | 4 | 8
         }
    
-        public static DebugFlags Debug
-        {
+        public static DebugFlags Debug {
             set {
                 NJB_Set_Debug((int)value);
             }
         }
         
-        public static bool Unicode
-        {
+        public static bool Unicode {
             set {
                 NJB_Set_Unicode(value ? 1 : 0);
             }

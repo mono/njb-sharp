@@ -1,0 +1,16 @@
+<Combine name="njb-sharp" fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry configuration="Debug" build="True" name="njb-sharp" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry configuration="Debug" build="True" name="njb-sharp" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="njb-sharp" single="True">
+    <Execute type="None" entry="njb-sharp" />
+  </StartMode>
+  <Entries>
+    <Entry filename="./njb-sharp.mdp" />
+  </Entries>
+</Combine>

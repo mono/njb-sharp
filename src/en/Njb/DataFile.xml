@@ -1,5 +1,5 @@
-<Type Name="SongFrame" FullName="Njb.SongFrame">
-  <TypeSignature Language="C#" Value="public class SongFrame" />
+<Type Name="DataFile" FullName="Njb.DataFile">
+  <TypeSignature Language="C#" Value="public class DataFile : System.IDisposable" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
     <AssemblyVersion>0.2.0.40905</AssemblyVersion>
@@ -7,22 +7,26 @@
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Members>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SongFrame (IntPtr framePtr);" />
-      <MemberType>Constructor</MemberType>
-      <Parameters>
-        <Parameter Name="framePtr" Type="System.IntPtr" />
-      </Parameters>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
       <Docs>
-        <param name="framePtr">To be added.</param>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Label">
-      <MemberSignature Language="C#" Value="public string Label { get; };" />
+    <Member MemberName="FileName">
+      <MemberSignature Language="C#" Value="public string FileName { get; };" />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -33,20 +37,8 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="FrameType">
-      <MemberSignature Language="C#" Value="public Njb.SongFrameType FrameType { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>Njb.SongFrameType</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DataString">
-      <MemberSignature Language="C#" Value="public string DataString { get; };" />
+    <Member MemberName="Folder">
+      <MemberSignature Language="C#" Value="public string Folder { get; };" />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -57,20 +49,8 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="DataShort">
-      <MemberSignature Language="C#" Value="public ushort DataShort { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.UInt16</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DataInt">
-      <MemberSignature Language="C#" Value="public uint DataInt { get; };" />
+    <Member MemberName="TimeStamp">
+      <MemberSignature Language="C#" Value="public uint TimeStamp { get; };" />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.UInt32</ReturnType>
@@ -81,21 +61,39 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Find">
-      <MemberSignature Language="C#" Value="public static Njb.SongFrame Find (Njb.Song song, string label);" />
-      <MemberType>Method</MemberType>
+    <Member MemberName="Flags">
+      <MemberSignature Language="C#" Value="public uint Flags { get; };" />
+      <MemberType>Property</MemberType>
       <ReturnValue>
-        <ReturnType>Njb.SongFrame</ReturnType>
+        <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
-      <Parameters>
-        <Parameter Name="song" Type="Njb.Song" />
-        <Parameter Name="label" Type="System.String" />
-      </Parameters>
       <Docs>
-        <param name="song">To be added.</param>
-        <param name="label">To be added.</param>
         <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Id">
+      <MemberSignature Language="C#" Value="public uint Id { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FileSize">
+      <MemberSignature Language="C#" Value="public ulong FileSize { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.UInt64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

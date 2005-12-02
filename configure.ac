@@ -2,8 +2,8 @@ AC_INIT(README)
 AC_CANONICAL_SYSTEM
 
 MAJOR_VERSION=0
-MINOR_VERSION=1
-MICRO_VERSION=1
+MINOR_VERSION=2
+MICRO_VERSION=0
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$MICRO_VERSION
 
 AM_INIT_AUTOMAKE(njb-sharp, $VERSION)
@@ -16,8 +16,7 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AM_PROG_LIBTOOL
 
-PKG_CHECK_MODULES(NJB,
-    libnjb >= 2.2.4)
+PKG_CHECK_MODULES(NJB, libnjb >= 2.2.4)
 
 AC_PATH_PROG(MONO, mono, no)
 if test "x$MONO" = "xno"; then
@@ -33,7 +32,7 @@ AC_ARG_ENABLE(docs, AC_HELP_STRING([--disable-docs], [Do not build documentation
 
 if test "x$with_docs" = "xyes"; then
     AC_PATH_PROG(MONODOCER, monodocer, no)
-    if test "x$MONODOC" = "xno"; then
+    if test "x$MONODOCER" = "xno"; then
         AC_MSG_ERROR([You need to install monodoc])
     fi
 

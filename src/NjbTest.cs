@@ -39,7 +39,7 @@ public class Test
         }
     }
     
-    public static void Main()
+    public static void Main(string [] args)
     {
         Discoverer discoverer = new Discoverer();
         //Global.Debug = Global.DebugFlags.ALL;
@@ -57,17 +57,51 @@ public class Test
             
             device.Capture();
             
-            //device.Owner = "Aaron Bockover";
             Console.WriteLine(device);
 
-            foreach(Song song in device.Songs) {
-                Console.WriteLine(song);            
+            if(args.Length == 0) {
+                foreach(Song song in device.Songs) {
+                    Console.WriteLine(song);
+                }
+            } else {
+                bool get_all = args[0] == "all";
+                
+                foreach(string sid in args) {
+                    int id =0;
+                    
+                    if(!get_all) {
+                        try {
+                            id = Convert.ToInt32(sid);
+                        } catch(Exception) {
+                            continue;
+                        }
+                    }
+                    
+                    foreach(Song song in device.Songs) {
+                        if(song.Id != id && !get_all) {
+                            continue;
+                        }
+                        
+                        string filename = song.TrackNumber.ToString("00") + ". " + song.Artist 
+                            + " - " + song.Title + "." + song.Codec.ToLower();
+                        
+                        device.ReadProgressChanged += OnProgress;
+                        device.ReadSong(song, filename);
+                        device.ReadProgressChanged -= OnProgress;
+                        
+                        Console.WriteLine("");
+                    }
+                }
             }
 
             device.Release();
-            device.Close();
+            device.Dispose();
         }
-        
-        discoverer.Dispose();
+    }
+    
+    public static void OnProgress(object o, TransferProgressArgs args)
+    {
+        Console.Write("Transferring {0} - {1}: {2}%\r", args.Song.Artist, args.Song.Title, 
+            (args.Current * 100) / args.Total);
     }
 }

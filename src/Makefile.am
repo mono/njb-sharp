@@ -1,3 +1,4 @@
+MCS_FLAGS = -debug
 ASSEMBLY = njb-sharp.dll
 TESTASM = njb-test.exe
 INCLUDES = $(NJB_CFLAGS)
@@ -6,7 +7,7 @@ DOC_UPDATER = @MONODOCER@ -delete
 DOC_ASSEMBLER = @MDASSEMBLER@ --out njb-sharp-docs --ecma
 
 njbdir = $(prefix)/lib/njb-sharp
-njb_DATA = $(ASSEMBLY) 
+njb_SCRIPTS = $(ASSEMBLY) $(ASSEMBLY).mdb
 njb_LTLIBRARIES = libnjbglue.la
 
 noinst_DATA = $(TESTASM)
@@ -19,6 +20,7 @@ libnjbglue_la_LIBADD = $(NJB_LIBS)
 ASSEMBLY_SOURCES = \
     $(srcdir)/Discoverer.cs \
     $(srcdir)/Device.cs \
+	$(srcdir)/DataFile.cs \
     $(srcdir)/Song.cs \
     $(srcdir)/SongFrame.cs \
     $(srcdir)/Global.cs \
@@ -42,7 +44,7 @@ njb_sharp_generated_sources = $(njb_sharp_sources_in:.in=)
 all: $(ASSEMBLY) $(TESTASM)
 
 $(ASSEMBLY): $(ASSEMBLY_SOURCES)
-	$(MCS) $(MCS_FLAGS) -target:library -out:$@ $(ASSEMBLY_SOURCES) $(njb_sharp_generated_sources)
+	$(MCS) $(MCS_FLAGS) -target:library -r:Mono.Posix -out:$@ $(ASSEMBLY_SOURCES) $(njb_sharp_generated_sources)
 
 $(TESTASM): $(TESTASM_SOURCES)
 	$(MCS) $(MCS_FLAGS) -out:$@ -r:$(ASSEMBLY) $(TESTASM_SOURCES)
@@ -64,6 +66,6 @@ EXTRA_DIST = \
     njb-sharp-docs.source \
     AssemblyInfo.cs.in
 
-CLEANFILES = $(ASSEMBLY) $(TESTASM)
+CLEANFILES = $(ASSEMBLY) $(TESTASM) *.mdb
 DISTCLEANFILES = Makefile.in njb-sharp-docs.zip njb-sharp-docs.tree
 

@@ -43,7 +43,26 @@ namespace Njb
         public IntPtr cur;
         public IntPtr next;
     }
-
+    
+    internal sealed class FrameName
+    {
+        public static readonly string 
+            Album = "ALBUM",
+            Artist = "ARTIST",
+            Bitrate = "BITRATE",
+            Codec = "CODEC", 
+            Comment = "COMMENT",
+            FileName = "FNAME",
+            Folder = "FOLDER",
+            Genre = "GENRE",
+            Length = "LENGTH",
+            Protected = "PlayOnly",
+            FileSize = "FILE SIZE",
+            Title = "TITLE",
+            TrackNumber = "TRACK NUM",
+            Year = "YEAR";
+    }
+    
     public class Song : IDisposable
     {
         [DllImport("libnjb")]
@@ -61,50 +80,167 @@ namespace Njb
         private HandleRef handle;
         private int id;
         private int nframes;
-        private ArrayList frames;
         
         public Song() : this(NJB_Songid_New())
         {
-        
         }
         
         public Song(IntPtr songidPtr)
         {
             handle = new HandleRef(this, songidPtr);
-            
-            njb_songid_t songidRaw = (njb_songid_t)Marshal.PtrToStructure(
-                songidPtr, typeof(njb_songid_t));
-                
+            njb_songid_t songidRaw = (njb_songid_t)Marshal.PtrToStructure(songidPtr, typeof(njb_songid_t));
             id = (int)songidRaw.trid;
             nframes = (int)songidRaw.nframes;
-            
-            frames = new ArrayList();
-            IntPtr framePtr = IntPtr.Zero;
-            
-            NJB_Songid_Reset_Getframe(handle);
-            
-            while((framePtr = NJB_Songid_Getframe(handle)) != IntPtr.Zero) {
-                frames.Add(new SongFrame(framePtr));
+        }
+        
+        internal HandleRef Handle {
+            get {
+                return handle;
             }
         }
         
-        public int Id
-        {
+        public int Id {
             get {
                 return id;
             }
         }
         
-        public int FrameCount
-        {
+        public int FrameCount {
             get {
                 return nframes;
             }
         }
         
-        public SongFrame [] Frames
+        private SongFrame FindFrame(string label)
         {
+            return SongFrame.Find(this, label);
+        }
+        
+        private string GetFrameString(string label)
+        {
+            SongFrame frame = FindFrame(label);
+            if(frame == null) {
+                return null;
+            }
+            
+            return frame.DataString;
+        }
+        
+        private ushort GetFrameShort(string label)
+        {
+            SongFrame frame = FindFrame(label);
+            if(frame == null) {
+                return 0;
+            }
+            
+            return frame.DataShort;
+        }
+        
+        private uint GetFrameInt(string label)
+        {
+            SongFrame frame = FindFrame(label);
+            if(frame == null) {
+                return 0;
+            }
+            
+            return frame.DataInt;
+        }
+        
+        public string Album {
             get {
+                return GetFrameString(FrameName.Album);
+            }
+        }
+        
+        public string Artist {
+            get {
+                return GetFrameString(FrameName.Artist);
+            }
+        }
+        
+        public uint Bitrate {
+            get {
+                return GetFrameInt(FrameName.Bitrate);
+            }
+        }
+        
+        public string Codec {
+            get {
+                return GetFrameString(FrameName.Codec);
+            }
+        }
+        
+        public string Comment {
+            get {
+                return GetFrameString(FrameName.Comment);
+            }
+        }
+        
+        public string FileName {
+            get {
+                return GetFrameString(FrameName.FileName);
+            }
+        }
+        
+        public uint FileSize {
+            get {
+                return GetFrameInt(FrameName.FileSize);
+            }
+        }
+        
+        public string Folder {
+            get {
+                return GetFrameString(FrameName.Folder);
+            }
+        }
+        
+        public string Genre {
+            get {
+                return GetFrameString(FrameName.Genre);
+            }
+        }
+        
+        public ushort Length {
+            get {
+                return GetFrameShort(FrameName.Length);
+            }
+        }
+        
+        public bool IsProtected {
+            get {
+                return GetFrameShort(FrameName.Protected) != 0;
+            }
+        }
+        
+        public string Title {
+            get {
+                return GetFrameString(FrameName.Title);
+            }
+        }
+        
+        public ushort TrackNumber {
+            get {
+                return GetFrameShort(FrameName.TrackNumber);
+            }
+        }
+        
+        public ushort Year {
+            get {
+                return GetFrameShort(FrameName.Year);
+            }
+        }
+        
+        public SongFrame [] Frames {
+            get {
+                ArrayList frames = new ArrayList();
+                IntPtr framePtr = IntPtr.Zero;
+            
+                NJB_Songid_Reset_Getframe(handle);
+            
+                while((framePtr = NJB_Songid_Getframe(handle)) != IntPtr.Zero) {
+                    frames.Add(new SongFrame(framePtr));
+                }
+                
                 return frames.ToArray(typeof(SongFrame)) as SongFrame [];
             }
         }

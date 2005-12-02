@@ -62,6 +62,19 @@ namespace Njb
         [DllImport("libnjbglue")]
         private static extern uint NJB_Glue_Song_Frame_Get_Data_UInt32(IntPtr frame);
         
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Songid_Findframe(HandleRef handle, IntPtr label);
+        
+        public static SongFrame Find(Song song, string label)
+        {
+            IntPtr ptr = NJB_Songid_Findframe(song.Handle, Utility.Utf8StringToPtr(label));
+            if(ptr == IntPtr.Zero) {
+                return null;
+            }
+            
+            return new SongFrame(ptr);
+        }
+        
         public SongFrame(IntPtr framePtr)
         {
             label = Utility.PtrToUtf8String(NJB_Glue_Song_Frame_Get_Label(framePtr));
@@ -84,22 +97,19 @@ namespace Njb
             }
         }
 
-        public string Label
-        {
+        public string Label {
             get {
                 return label;
             }
         }
 
-        public SongFrameType FrameType
-        {
+        public SongFrameType FrameType {
             get {
                 return frameType;
             }
         } 
 
-        public string DataString
-        {
+        public string DataString {
             get {
                 if(FrameType != SongFrameType.String) {
                     throw new ApplicationException("Frame data is not string");
@@ -109,8 +119,7 @@ namespace Njb
             }
         }
         
-        public ushort DataShort
-        {
+        public ushort DataShort {
             get {
                 if(FrameType != SongFrameType.UInt16) {
                     throw new ApplicationException("Frame data is not uint16");
@@ -120,8 +129,7 @@ namespace Njb
             }
         }
         
-        public uint DataInt
-        {
+        public uint DataInt {
             get {
                 if(FrameType != SongFrameType.UInt32) {
                     throw new ApplicationException("Frame data is not uint32");

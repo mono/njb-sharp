@@ -1,5 +1,5 @@
-<Type Name="ForeachErrorCallback" FullName="Njb.ForeachErrorCallback">
-  <TypeSignature Language="C#" Value="public delegate void ForeachErrorCallback(string error);" />
+<Type Name="TransferProgressHandler" FullName="Njb.TransferProgressHandler">
+  <TypeSignature Language="C#" Value="public delegate void TransferProgressHandler(object o, Njb.TransferProgressArgs args);" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
     <AssemblyVersion>0.2.0.40905</AssemblyVersion>
@@ -8,13 +8,15 @@
     <BaseTypeName>System.Delegate</BaseTypeName>
   </Base>
   <Parameters>
-    <Parameter Name="error" Type="System.String" />
+    <Parameter Name="o" Type="System.Object" />
+    <Parameter Name="args" Type="Njb.TransferProgressArgs" />
   </Parameters>
   <ReturnValue>
     <ReturnType>System.Void</ReturnType>
   </ReturnValue>
   <Docs>
-    <param name="error">To be added.</param>
+    <param name="o">To be added.</param>
+    <param name="args">To be added.</param>
     <summary>To be added.</summary>
     <remarks>To be added.</remarks>
   </Docs>
