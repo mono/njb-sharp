@@ -124,6 +124,12 @@ namespace Njb
 
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Get_Device(int index);
+        
+        [DllImport("libnjbglue")]
+        private static extern IntPtr NJB_Glue_Device_Get_Usb_Filename(IntPtr njb);
+        
+        [DllImport("libnjbglue")]
+        private static extern IntPtr NJB_Glue_Device_Get_Usb_Bus_Path(IntPtr njb);
 
         public event TransferProgressHandler ReadProgressChanged;
 
@@ -170,6 +176,18 @@ namespace Njb
         internal IntPtr Handle {
             get {
                 return NJB_Glue_Get_Device(index);
+            }
+        }
+        
+        public short UsbDeviceId {
+            get {
+                return Convert.ToInt16(Marshal.PtrToStringAnsi(NJB_Glue_Device_Get_Usb_Filename(Handle)));
+            }
+        }
+        
+        public short UsbBusPath {
+            get {
+                return Convert.ToInt16(Marshal.PtrToStringAnsi(NJB_Glue_Device_Get_Usb_Bus_Path(Handle)));
             }
         }
 
@@ -420,6 +438,9 @@ namespace Njb
             text.AppendFormat("Index              {0}\n", Index);
             text.AppendFormat("DeviceName:        {0}\n", Name);
             text.AppendFormat("USB Name:          {0}\n", UsbName);
+            text.AppendFormat("USB Bus:           0x{0:x4}\n", UsbBusPath);
+            text.AppendFormat("USB Device:        0x{0:x4}\n", UsbDeviceId);
+            text.AppendFormat("USB Hash:          0x{0:x8}\n", GetHashCode());
             text.AppendFormat("Owner:             {0}\n", Owner);
             text.AppendFormat("Battery Level:     {0}%\n", BatteryLevel);
             text.AppendFormat("Battery Charging:  {0}\n", IsBatteryCharging ? "YES" : "NO");
@@ -431,6 +452,22 @@ namespace Njb
             text.AppendFormat("SMDI ID:           {0}\n", SdmiIdString);
                        
             return text.ToString();
+        }
+        
+        public override bool Equals(object o)
+        {
+            Device d = o as Device;
+            
+            if(d == null) {
+                return false;
+            }
+            
+            return d.UsbDeviceId == UsbDeviceId && d.UsbBusPath == UsbBusPath;
+        }
+        
+        public override int GetHashCode()
+        {
+            return (UsbBusPath << 16) | UsbDeviceId;
         }
     }
 }

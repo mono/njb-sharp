@@ -1,6 +1,6 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="njb-sharp" Version="0.2.0.40905">
+    <Assembly Name="njb-sharp" Version="0.2.0.24756">
       <Attributes>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany(Company="Novell, Inc")</AttributeName>

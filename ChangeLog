@@ -1,3 +1,14 @@
+2005-12-17  Aaron Bockover  <aaron@aaronbock.net>
+
+	* src/Device.cs: Added support for finding the USB bus and file path
+	of the device; Added overrides for Equals and GetHashCode methods
+	based on UsbDeviceId and UsbBusPath properties
+
+	* src/njb-glue.c: Added two new helper methods to proxy device path and	
+	filename information from underlying libusb structures
+
+	* src/en/*: Updated docs
+
 2005-12-01  Aaron Bockover  <aaron@aaronbock.net>
 
 	* njb-sharp.pc.in: Added a LibraryBase variable

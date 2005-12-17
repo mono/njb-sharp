@@ -27,6 +27,7 @@
  */
 
 #include <libnjb.h>
+#include <usb.h>
 
 static njb_t *njb_devices[NJB_MAX_DEVICES];
 
@@ -38,6 +39,16 @@ njb_t *NJB_Glue_Get_Device_Array()
 njb_t *NJB_Glue_Get_Device(int i)
 {
     return (njb_t *)&njb_devices[i];
+}
+
+const char *NJB_Glue_Device_Get_Usb_Filename(njb_t *njb)
+{
+    return njb->device->filename;
+}
+
+const char *NJB_Glue_Device_Get_Usb_Bus_Path(njb_t *njb)
+{
+    return njb->device->bus->dirname;
 }
 
 const char *NJB_Glue_Song_Frame_Get_Label(njb_songid_frame_t *frame)
