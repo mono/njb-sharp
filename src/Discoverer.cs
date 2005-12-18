@@ -46,10 +46,14 @@ namespace Njb
 
         public Discoverer()
         {
+            Global.Unicode = true;
+            Rescan();
+        }
+
+        public void Rescan()
+        {
             int count;
 
-            Global.Unicode = true;
-            
             if(NJB_Discover(NJB_Glue_Get_Device_Array(), 0, out count) == -1) {
                 throw new ApplicationException("Could not run NJB Discover");
             }

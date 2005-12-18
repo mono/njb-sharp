@@ -146,7 +146,9 @@ namespace Njb
 
         public void Dispose()
         {
-            NJB_Close(Handle);
+            if(Handle != IntPtr.Zero) {
+                NJB_Close(Handle);
+            }
         }
         
         public bool Capture()

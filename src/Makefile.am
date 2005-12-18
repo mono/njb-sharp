@@ -8,6 +8,7 @@ DOC_ASSEMBLER = @MDASSEMBLER@ --out njb-sharp-docs --ecma
 
 njbdir = $(prefix)/lib/njb-sharp
 njb_SCRIPTS = $(ASSEMBLY) $(ASSEMBLY).mdb
+njb_DATA = $(ASSEMBLY).config
 njb_LTLIBRARIES = libnjbglue.la
 
 noinst_DATA = $(TESTASM)
@@ -20,6 +21,7 @@ libnjbglue_la_LIBADD = $(NJB_LIBS)
 ASSEMBLY_SOURCES = \
     $(srcdir)/Discoverer.cs \
     $(srcdir)/Device.cs \
+	$(srcdir)/DeviceId.cs \
 	$(srcdir)/DataFile.cs \
     $(srcdir)/Song.cs \
     $(srcdir)/SongFrame.cs \
@@ -64,7 +66,8 @@ EXTRA_DIST = \
     $(srcdir)/en/*.xml \
     $(srcdir)/en/*/*.xml \
     njb-sharp-docs.source \
-    AssemblyInfo.cs.in
+    AssemblyInfo.cs.in \
+	$(ASSEMBLY).config.in
 
 CLEANFILES = $(ASSEMBLY) $(TESTASM) *.mdb
 DISTCLEANFILES = Makefile.in njb-sharp-docs.zip njb-sharp-docs.tree

@@ -1,3 +1,29 @@
+2005-12-18  Aaron Bockover  <aaron@aaronbock.net>
+	
+	* njb-sharp.mdp: Updated MonoDevelop project
+
+	* src/njb-sharp.dll.config.in: DLL Map; should remain unused directly
+	in consuming applications for now, but can serve as a template for the
+	end application to use
+
+	* configure.ac: Added expanded_libdir variable and generate a DLL map
+	
+	* src/Device.cs (Dispose): Only call NJB_Close if Handle is still valid
+	
+	* src/Discoverer.cs: Added a Rescan method which may need to be used
+	for rediscovering potentially new devices. Refreshes the device list
+	cache. Very useful if consuming application also uses HAL for device
+	notification.
+
+	* src/Makefile.am: Added DeviceId.cs
+
+	* src/DeviceId.cs: Simple class and static table to perform "pre" device
+	lookup to verify if a USB device will most likely be supported by libnjb.
+	Lookups to table are performed based on USB vendor and product IDs. This
+	is useful for HAL-based detection, where probing Njb.Discoverer may be
+	costly for each [USB] device in the system. Also maps device names to
+	something more suitable for display.
+
 2005-12-17  Aaron Bockover  <aaron@aaronbock.net>
 
 	* src/Device.cs: Added support for finding the USB bus and file path
