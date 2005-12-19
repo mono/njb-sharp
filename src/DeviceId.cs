@@ -32,20 +32,21 @@ namespace Njb
     public class DeviceId
     {
         private static DeviceId [] device_id_list = {
-            new DeviceId("Creative Nomad Jukebox",                   "Nomad Jukebox",      0x0471,   0x0222),
-            new DeviceId("Creative Nomad Jukebox 2",                 "Nomad Jukebox",      0x041e,   0x4100),
-            new DeviceId("Creative Nomad Jukebox 3",                 "Nomad Jukebox",      0x041e,   0x4101),
-            new DeviceId("Creative Nomad Jukebox Zen",               "Zen Jukebox",        0x041e,   0x4108),
-            new DeviceId("Creative Nomad Jukebox Zen USB 2.0",       "Zen Jukebox",        0x041e,   0x410b),
-            new DeviceId("Creative Nomad Jukebox Zen NX",            "Zen NX Jukebox",     0x041e,   0x4109),
-            new DeviceId("Creative Nomad Jukebox Zen Xtra",          "Zen Xtra Jukebox",   0x041e,   0x4110),
-            new DeviceId("Dell Digital Jukebox",                     "Dell Jukebox",       0x041e,   0x4111),
-            new DeviceId("Creative Nomad Jukebox Zen Touch",         "Nomad Jukebox",      0x041e,   0x411b),
-            new DeviceId("Creative Zen (Zen Micro variant)",         "Zen Micro",          0x041e,   0x411d),
-            new DeviceId("Creative Nomad Jukebox Zen Micro",         "Zen Micro",          0x041e,   0x411e),
-            new DeviceId("Second Generation Dell Digital Jukebox",   "Dell Jukebox",       0x041e,   0x4126),
-            new DeviceId("Dell Pocket DJ",                           "Dell Pocket DJ",     0x041e,   0x4127),
-            new DeviceId("Creative Zen Sleek",                       "Zen Sleek",          0x041e,   0x4136)
+            //           Full Device Name                            Display/Short Name    Vendor ID   Product ID
+            new DeviceId("Creative Nomad Jukebox",                   "Nomad Jukebox",      0x0471,     0x0222),
+            new DeviceId("Creative Nomad Jukebox 2",                 "Nomad Jukebox",      0x041e,     0x4100),
+            new DeviceId("Creative Nomad Jukebox 3",                 "Nomad Jukebox",      0x041e,     0x4101),
+            new DeviceId("Creative Nomad Jukebox Zen",               "Zen Jukebox",        0x041e,     0x4108),
+            new DeviceId("Creative Nomad Jukebox Zen USB 2.0",       "Zen Jukebox",        0x041e,     0x410b),
+            new DeviceId("Creative Nomad Jukebox Zen NX",            "Zen NX Jukebox",     0x041e,     0x4109),
+            new DeviceId("Creative Nomad Jukebox Zen Xtra",          "Zen Xtra Jukebox",   0x041e,     0x4110),
+            new DeviceId("Dell Digital Jukebox",                     "Dell Jukebox",       0x041e,     0x4111),
+            new DeviceId("Creative Nomad Jukebox Zen Touch",         "Nomad Jukebox",      0x041e,     0x411b),
+            new DeviceId("Creative Zen (Zen Micro variant)",         "Zen Micro",          0x041e,     0x411d),
+            new DeviceId("Creative Nomad Jukebox Zen Micro",         "Zen Micro",          0x041e,     0x411e),
+            new DeviceId("Second Generation Dell Digital Jukebox",   "Dell Jukebox",       0x041e,     0x4126),
+            new DeviceId("Dell Pocket DJ",                           "Dell Pocket DJ",     0x041e,     0x4127),
+            new DeviceId("Creative Zen Sleek",                       "Zen Sleek",          0x041e,     0x4136)
         };
 
         public static DeviceId [] ListAll {

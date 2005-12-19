@@ -80,22 +80,30 @@ namespace Njb
         private HandleRef handle;
         private int id;
         private int nframes;
+        private Device device;
         
-        public Song() : this(NJB_Songid_New())
+        public Song(Device device) : this(NJB_Songid_New(), device)
         {
         }
         
-        public Song(IntPtr songidPtr)
+        public Song(IntPtr songidPtr, Device device)
         {
             handle = new HandleRef(this, songidPtr);
             njb_songid_t songidRaw = (njb_songid_t)Marshal.PtrToStructure(songidPtr, typeof(njb_songid_t));
             id = (int)songidRaw.trid;
             nframes = (int)songidRaw.nframes;
+            this.device = device;
         }
         
         internal HandleRef Handle {
             get {
                 return handle;
+            }
+        }
+        
+        public Device Device {
+            get {
+                return device;
             }
         }
         
@@ -200,9 +208,9 @@ namespace Njb
             }
         }
         
-        public ushort Length {
+        public TimeSpan Duration {
             get {
-                return GetFrameShort(FrameName.Length);
+                return new TimeSpan(GetFrameShort(FrameName.Length) * TimeSpan.TicksPerSecond);
             }
         }
         
@@ -230,19 +238,18 @@ namespace Njb
             }
         }
         
-        public SongFrame [] Frames {
-            get {
-                ArrayList frames = new ArrayList();
-                IntPtr framePtr = IntPtr.Zero;
-            
-                NJB_Songid_Reset_Getframe(handle);
-            
-                while((framePtr = NJB_Songid_Getframe(handle)) != IntPtr.Zero) {
-                    frames.Add(new SongFrame(framePtr));
-                }
-                
-                return frames.ToArray(typeof(SongFrame)) as SongFrame [];
+        public ICollection GetFrames()
+        {
+            ArrayList frames = new ArrayList();
+            IntPtr framePtr = IntPtr.Zero;
+
+            NJB_Songid_Reset_Getframe(handle);
+
+            while((framePtr = NJB_Songid_Getframe(handle)) != IntPtr.Zero) {
+                frames.Add(new SongFrame(framePtr));
             }
+
+            return frames;
         }
         
         public void Dispose()
@@ -257,7 +264,7 @@ namespace Njb
             text.AppendFormat("Song ID     : {0}\n", Id);
             text.AppendFormat("Frame Count : {0}\n", FrameCount);
 
-            foreach(SongFrame frame in Frames) {
+            foreach(SongFrame frame in GetFrames()) {
                 text.AppendFormat("  {0}\n", frame);
             }
             

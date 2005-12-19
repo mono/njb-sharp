@@ -2,7 +2,7 @@
   <TypeSignature Language="C#" Value="public enum DebugFlags" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
-    <AssemblyVersion>0.2.0.24756</AssemblyVersion>
+    <AssemblyVersion>0.2.0.39756</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>

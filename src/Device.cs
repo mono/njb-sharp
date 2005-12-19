@@ -321,26 +321,40 @@ namespace Njb
                 byte [] id = SdmiId;
                 
                 for(int i = 0; i < SdmiId.Length; i++) {
-                    idstr += String.Format("{0:x2}", id[i]);
+                    idstr += String.Format("{0:X2}", id[i]);
                 }
                 
                 return idstr;
             }
         }
-        
-        public Song [] Songs {
-            get {
-                ArrayList list = new ArrayList();
-                IntPtr songPtr = IntPtr.Zero;
-                
-                NJB_Reset_Get_Track_Tag(Handle);
-                
-                while((songPtr = NJB_Get_Track_Tag(Handle)) != IntPtr.Zero) {
-                    list.Add(new Song(songPtr));
-                }
-                
-                return list.ToArray(typeof(Song)) as Song []; 
+
+        public ICollection GetSongs()
+        {
+            ArrayList list = new ArrayList();
+            IntPtr songPtr = IntPtr.Zero;
+
+            NJB_Reset_Get_Track_Tag(Handle);
+
+            while((songPtr = NJB_Get_Track_Tag(Handle)) != IntPtr.Zero) {
+                list.Add(new Song(songPtr, this));
             }
+
+            return list;
+        }
+        
+        public Song GetSong(uint id)
+        {
+            IntPtr songPtr = IntPtr.Zero;
+            NJB_Reset_Get_Track_Tag(Handle);
+
+            while((songPtr = NJB_Get_Track_Tag(Handle)) != IntPtr.Zero) {
+                Song song = new Song(songPtr, this);
+                if(song.Id == id) {
+                    return song;
+                }
+            }
+            
+            return null;
         }
         
         public void ReadSong(Song song, string path)
@@ -368,20 +382,19 @@ namespace Njb
             stream.Close();
         }
         
-        public DataFile [] DataFiles {
-            get {
-                ArrayList list = new ArrayList();
-                IntPtr df_ptr = IntPtr.Zero;
-                
-                NJB_Reset_Get_Datafile_Tag(Handle);
-                
-                while((df_ptr = NJB_Get_Datafile_Tag(Handle)) != IntPtr.Zero) {
-                    list.Add(new DataFile(df_ptr));
-                }
-                
-                return list.ToArray(typeof(DataFile)) as DataFile [];
-           }
-       }
+        public ICollection GetDataFiles() 
+        {
+            ArrayList list = new ArrayList();
+            IntPtr df_ptr = IntPtr.Zero;
+
+            NJB_Reset_Get_Datafile_Tag(Handle);
+
+            while((df_ptr = NJB_Get_Datafile_Tag(Handle)) != IntPtr.Zero) {
+                list.Add(new DataFile(df_ptr));
+            }
+
+            return list;
+        }
         
         public string NextError {
             get {

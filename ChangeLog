@@ -1,4 +1,23 @@
 2005-12-18  Aaron Bockover  <aaron@aaronbock.net>
+
+	* src/en/*: Updated documentation
+
+	* src/DeviceId.cs: Make table more easily readable
+
+	* src/Device.cs: Changed Songs and DataFiles properties to GetSongs and
+	GetDataFiles methods returning an ICollection as the tasks are expensive
+	and exposing as properties is misleading (framework design guidelines);
+	uppercase the SDMIID
+
+	* src/Song.cs: Changed Frames property to GetFrames method as the 
+	operation is expensive (conform to .NET framework design guidelines);
+	changed Length (ushort) property to Duration (TimeSpan); added a Device
+	property for 'parent' lookups
+
+	* src/NjbTest.cs: Updated to reflect change from properties to methods
+	for GetSongs()
+
+2005-12-18  Aaron Bockover  <aaron@aaronbock.net>
 	
 	* njb-sharp.mdp: Updated MonoDevelop project
 

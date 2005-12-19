@@ -1,6 +1,6 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="njb-sharp" Version="0.2.0.24756">
+    <Assembly Name="njb-sharp" Version="0.2.0.39756">
       <Attributes>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany(Company="Novell, Inc")</AttributeName>
@@ -33,6 +33,7 @@
       <Type Name="TransferProgressArgs" />
       <Type Name="DataFile" />
       <Type Name="TransferProgressHandler" />
+      <Type Name="DeviceId" />
     </Namespace>
   </Types>
   <Title>njb-sharp</Title>

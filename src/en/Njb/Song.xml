@@ -2,7 +2,7 @@
   <TypeSignature Language="C#" Value="public class Song : System.IDisposable" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
-    <AssemblyVersion>0.2.0.24756</AssemblyVersion>
+    <AssemblyVersion>0.2.0.39756</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -13,27 +13,6 @@
     </Interface>
   </Interfaces>
   <Members>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Song ();" />
-      <MemberType>Constructor</MemberType>
-      <Parameters />
-      <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Song (IntPtr songidPtr);" />
-      <MemberType>Constructor</MemberType>
-      <Parameters>
-        <Parameter Name="songidPtr" Type="System.IntPtr" />
-      </Parameters>
-      <Docs>
-        <param name="songidPtr">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public void Dispose ();" />
       <MemberType>Method</MemberType>
@@ -63,18 +42,6 @@
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Frames">
-      <MemberSignature Language="C#" Value="public Njb.SongFrame[] Frames { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>Njb.SongFrame[]</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -190,18 +157,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Length">
-      <MemberSignature Language="C#" Value="public ushort Length { get; };" />
-      <MemberType>Property</MemberType>
-      <ReturnValue>
-        <ReturnType>System.UInt16</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="IsProtected">
       <MemberSignature Language="C#" Value="public bool IsProtected { get; };" />
       <MemberType>Property</MemberType>
@@ -247,6 +202,69 @@
       <Docs>
         <summary>To be added.</summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Duration">
+      <MemberSignature Language="C#" Value="public TimeSpan Duration { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Song (Njb.Device device);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="device" Type="Njb.Device" />
+      </Parameters>
+      <Docs>
+        <param name="device">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Song (IntPtr songidPtr, Njb.Device device);" />
+      <MemberType>Constructor</MemberType>
+      <Parameters>
+        <Parameter Name="songidPtr" Type="System.IntPtr" />
+        <Parameter Name="device" Type="Njb.Device" />
+      </Parameters>
+      <Docs>
+        <param name="songidPtr">To be added.</param>
+        <param name="device">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Device">
+      <MemberSignature Language="C#" Value="public Njb.Device Device { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.Device</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetFrames">
+      <MemberSignature Language="C#" Value="public System.Collections.ICollection GetFrames ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Collections.ICollection</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

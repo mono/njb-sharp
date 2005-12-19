@@ -1,0 +1,113 @@
+<Type Name="DeviceId" FullName="Njb.DeviceId">
+  <TypeSignature Language="C#" Value="public class DeviceId" />
+  <AssemblyInfo>
+    <AssemblyName>njb-sharp</AssemblyName>
+    <AssemblyVersion>0.2.0.39756</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Members>
+    <Member MemberName="IsNjbDevice">
+      <MemberSignature Language="C#" Value="public static bool IsNjbDevice (short vendorId, short productId);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="vendorId" Type="System.Int16" />
+        <Parameter Name="productId" Type="System.Int16" />
+      </Parameters>
+      <Docs>
+        <param name="vendorId">To be added.</param>
+        <param name="productId">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDeviceId">
+      <MemberSignature Language="C#" Value="public static Njb.DeviceId GetDeviceId (short vendorId, short productId);" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.DeviceId</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="vendorId" Type="System.Int16" />
+        <Parameter Name="productId" Type="System.Int16" />
+      </Parameters>
+      <Docs>
+        <param name="vendorId">To be added.</param>
+        <param name="productId">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ListAll">
+      <MemberSignature Language="C#" Value="public static Njb.DeviceId[] ListAll { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>Njb.DeviceId[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Name">
+      <MemberSignature Language="C#" Value="public string Name { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisplayName">
+      <MemberSignature Language="C#" Value="public string DisplayName { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VendorId">
+      <MemberSignature Language="C#" Value="public short VendorId { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int16</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProductId">
+      <MemberSignature Language="C#" Value="public short ProductId { get; };" />
+      <MemberType>Property</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Int16</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+  <Docs>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+</Type>

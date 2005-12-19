@@ -60,7 +60,7 @@ public class Test
             Console.WriteLine(device);
 
             if(args.Length == 0) {
-                foreach(Song song in device.Songs) {
+                foreach(Song song in device.GetSongs()) {
                     Console.WriteLine(song);
                 }
             } else {
@@ -77,7 +77,7 @@ public class Test
                         }
                     }
                     
-                    foreach(Song song in device.Songs) {
+                    foreach(Song song in device.GetSongs()) {
                         if(song.Id != id && !get_all) {
                             continue;
                         }

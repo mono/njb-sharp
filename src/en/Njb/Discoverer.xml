@@ -2,7 +2,7 @@
   <TypeSignature Language="C#" Value="public class Discoverer : System.Collections.IEnumerable" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
-    <AssemblyVersion>0.2.0.24756</AssemblyVersion>
+    <AssemblyVersion>0.2.0.39756</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -53,6 +53,18 @@
         <param name="i">To be added.</param>
         <summary>To be added.</summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Rescan">
+      <MemberSignature Language="C#" Value="public void Rescan ();" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
