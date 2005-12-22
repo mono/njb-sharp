@@ -1,3 +1,11 @@
+2005-12-22  Aaron Bockover  <aaron@aaronbock.net>
+
+	* configure.ac: Version 0.2.1
+
+	* src/Makefile.am: Install to $(pkglibdir)
+	
+	* src/en/*: Updated documentation
+
 2005-12-18  Aaron Bockover  <aaron@aaronbock.net>
 
 	* src/en/*: Updated documentation

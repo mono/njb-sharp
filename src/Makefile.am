@@ -6,7 +6,7 @@ INCLUDES = $(NJB_CFLAGS)
 DOC_UPDATER = @MONODOCER@ -delete
 DOC_ASSEMBLER = @MDASSEMBLER@ --out njb-sharp-docs --ecma
 
-njbdir = $(prefix)/lib/njb-sharp
+njbdir = $(pkglibdir)/njb-sharp
 njb_SCRIPTS = $(ASSEMBLY) $(ASSEMBLY).mdb
 njb_DATA = $(ASSEMBLY).config
 njb_LTLIBRARIES = libnjbglue.la
