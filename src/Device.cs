@@ -121,6 +121,13 @@ namespace Njb
         [DllImport("libnjb")]
         private static extern int NJB_Get_Track_fd(IntPtr njb, uint trackid, uint size, int fd, 
             NjbXferCallback cb, IntPtr data);
+           
+        [DllImport("libnjb")]
+        private static extern int NJB_Send_Track(IntPtr njb, IntPtr path, HandleRef songid,
+            NjbXferCallback cb, IntPtr data, out uint trackid);
+            
+        [DllImport("libnjb")]
+        private static extern int NJB_Delete_Track(IntPtr njb, uint trackid);
 
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Get_Device(int index);
@@ -131,7 +138,7 @@ namespace Njb
         [DllImport("libnjbglue")]
         private static extern IntPtr NJB_Glue_Device_Get_Usb_Bus_Path(IntPtr njb);
 
-        public event TransferProgressHandler ReadProgressChanged;
+        public event TransferProgressHandler ProgressChanged;
 
         public Device(Discoverer discoverer, int index)
         {
@@ -144,11 +151,16 @@ namespace Njb
             return NJB_Open(Handle) != -1;
         }
 
-        public void Dispose()
+        public void Close()
         {
             if(Handle != IntPtr.Zero) {
                 NJB_Close(Handle);
             }
+        }
+        
+        public void Dispose()
+        {
+            Close();
         }
         
         public bool Capture()
@@ -367,12 +379,12 @@ namespace Njb
                 
             if(NJB_Get_Track_fd(Handle, (uint)song.Id, song.FileSize, 
                 stream.Handle, delegate(ulong sent, ulong total, IntPtr buf, uint len, IntPtr data) {
-                    if(ReadProgressChanged != null) {
+                    if(ProgressChanged != null) {
                         TransferProgressArgs args = new TransferProgressArgs();
                         args.Current = sent;
                         args.Total = total;
                         args.Song = song;
-                        ReadProgressChanged(this, args);
+                        ProgressChanged(this, args);
                     }
                 }, IntPtr.Zero) == -1) {
                 stream.Close();
@@ -380,6 +392,37 @@ namespace Njb
             }
             
             stream.Close();
+        }
+        
+        public void SendSong(Song song, string path)
+        {
+            IntPtr path_ptr = Utility.Utf8StringToPtr(path);
+            
+            try {
+                uint trackid;
+                
+                if(NJB_Send_Track(Handle, path_ptr, song.Handle, 
+                    delegate(ulong sent, ulong total, IntPtr buf, uint len, IntPtr data) {
+                        if(ProgressChanged != null) {
+                            TransferProgressArgs args = new TransferProgressArgs();
+                            args.Current = sent;
+                            args.Total = total;
+                            args.Song = song;
+                            ProgressChanged(this, args);
+                        }
+                    }, IntPtr.Zero, out trackid) == -1) {
+                    throw new ApplicationException("Could not transfer song");
+                }
+            } finally {
+                Utility.FreeStringPtr(path_ptr);
+            }
+        }
+
+        public void DeleteSong(Song song)
+        {
+            if(NJB_Delete_Track(Handle, (uint)song.Id) == -1) {
+                throw new ApplicationException("Could not delete song " + song.Id);
+            }
         }
         
         public ICollection GetDataFiles() 

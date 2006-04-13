@@ -1,3 +1,13 @@
+2006-04-13  Aaron Bockover  <aaron@abock.org>
+
+	* src/SongFrame.cs: Fixed frame creation
+	
+	* src/Device.cs: Fixed send track support; added DeleteSong support
+	
+	* src/Utility.cs: Added FreeStringPtr
+	
+	* src/Song.cs: Added set accessors to common frame properties
+
 2005-12-22  Aaron Bockover  <aaron@aaronbock.net>
 
 	* configure.ac: Bump to 0.2.2

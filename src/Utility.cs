@@ -60,5 +60,10 @@ namespace Njb
             Marshal.WriteByte(memalloc, bytes.Length, 0);
             return memalloc;
         }
+        
+        public static void FreeStringPtr(IntPtr ptr)
+        {
+            Marshal.FreeHGlobal(ptr);
+        }
     }
 }

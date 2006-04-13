@@ -65,6 +65,20 @@ namespace Njb
         [DllImport("libnjb")]
         private static extern IntPtr NJB_Songid_Findframe(HandleRef handle, IntPtr label);
         
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Songid_Frame_New_String(IntPtr label, IntPtr value);
+        
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Songid_Frame_New_Uint16(IntPtr label, ushort value);
+        
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Songid_Frame_New_Uint32(IntPtr label, uint value);
+
+        [DllImport("libnjb")]
+        private static extern IntPtr NJB_Songid_Frame_New_Codec(IntPtr codec);
+        
+        private IntPtr handle;
+        
         public static SongFrame Find(Song song, string label)
         {
             IntPtr ptr = NJB_Songid_Findframe(song.Handle, Utility.Utf8StringToPtr(label));
@@ -75,9 +89,56 @@ namespace Njb
             return new SongFrame(ptr);
         }
         
+        public static SongFrame New(string label, string value)
+        {
+            if(value == null) {
+                return null;
+            }
+        
+            IntPtr label_ptr = Utility.Utf8StringToPtr(label);
+            IntPtr value_ptr = Utility.Utf8StringToPtr(value);
+            
+            SongFrame frame = new SongFrame(NJB_Songid_Frame_New_String(label_ptr, value_ptr));
+            
+            Utility.FreeStringPtr(label_ptr);
+            Utility.FreeStringPtr(value_ptr);
+            
+            return frame;
+        }
+                
+        public static SongFrame New(string label, uint value)
+        {
+            IntPtr label_ptr = Utility.Utf8StringToPtr(label);
+            SongFrame frame = new SongFrame(NJB_Songid_Frame_New_Uint32(label_ptr, value));
+            Utility.FreeStringPtr(label_ptr);
+            return frame;
+        }
+                
+        public static SongFrame New(string label, ushort value)
+        {
+            IntPtr label_ptr = Utility.Utf8StringToPtr(label);
+            SongFrame frame = new SongFrame(NJB_Songid_Frame_New_Uint16(label_ptr, value));
+            Utility.FreeStringPtr(label_ptr);
+            return frame;
+        }
+        
+                
+        public static SongFrame NewCodec(string codec)
+        {
+            IntPtr codec_ptr = Utility.Utf8StringToPtr(codec);
+            SongFrame frame = new SongFrame(NJB_Songid_Frame_New_Codec(codec_ptr));
+            Utility.FreeStringPtr(codec_ptr);
+            return frame;
+        }
+        
         public SongFrame(IntPtr framePtr)
         {
+            if(framePtr == IntPtr.Zero) {
+                throw new ApplicationException("Could not create SongFrame");
+            }
+        
             label = Utility.PtrToUtf8String(NJB_Glue_Song_Frame_Get_Label(framePtr));
+            handle = framePtr;
             
             switch(NJB_Glue_Song_Frame_Get_Type(framePtr)) {
                 case 0x00: 
@@ -95,6 +156,10 @@ namespace Njb
                 default:
                     throw new ApplicationException("Unknown frame type");
             }
+        }
+
+        public IntPtr Handle {
+            get { return handle; }
         }
 
         public string Label {

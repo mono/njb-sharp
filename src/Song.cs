@@ -77,6 +77,9 @@ namespace Njb
         [DllImport("libnjb")]
         private static extern IntPtr NJB_Songid_Getframe(HandleRef handle);
         
+        [DllImport("libnjb")]
+        private static extern void NJB_Songid_Addframe(HandleRef handle, IntPtr frame);
+        
         private HandleRef handle;
         private int id;
         private int nframes;
@@ -154,88 +157,98 @@ namespace Njb
             return frame.DataInt;
         }
         
-        public string Album {
-            get {
-                return GetFrameString(FrameName.Album);
+        private void AddFrame(SongFrame frame)
+        {
+            if(frame == null) {
+                return;
             }
+            
+            NJB_Songid_Addframe(Handle, frame.Handle);
+        }
+        
+        private void AddFrame(string label, string value)
+        {
+            AddFrame(SongFrame.New(label, value));
+        }
+        
+        private void AddFrame(string label, uint value)
+        {
+            AddFrame(SongFrame.New(label, value));
+        }
+        
+        private void AddFrame(string label, ushort value)
+        {
+            AddFrame(SongFrame.New(label, value));
+        }
+        
+        public string Album {
+            get { return GetFrameString(FrameName.Album); }
+            set { AddFrame(FrameName.Album, value); }
         }
         
         public string Artist {
-            get {
-                return GetFrameString(FrameName.Artist);
-            }
+            get { return GetFrameString(FrameName.Artist); }
+            set { AddFrame(FrameName.Artist, value); }
         }
         
         public uint Bitrate {
-            get {
-                return GetFrameInt(FrameName.Bitrate);
-            }
+            get { return GetFrameInt(FrameName.Bitrate); }
+            set { AddFrame(FrameName.Bitrate, value); }
         }
         
         public string Codec {
-            get {
-                return GetFrameString(FrameName.Codec);
-            }
+            get { return GetFrameString(FrameName.Codec); }
+            set { AddFrame(SongFrame.NewCodec(value)); }
         }
         
         public string Comment {
-            get {
-                return GetFrameString(FrameName.Comment);
-            }
+            get { return GetFrameString(FrameName.Comment); }
+            set { AddFrame(FrameName.Comment, value); }
         }
         
         public string FileName {
-            get {
-                return GetFrameString(FrameName.FileName);
-            }
+            get { return GetFrameString(FrameName.FileName); }
+            set { AddFrame(FrameName.FileName, value); }
         }
         
         public uint FileSize {
-            get {
-                return GetFrameInt(FrameName.FileSize);
-            }
+            get { return GetFrameInt(FrameName.FileSize); }
+            set { AddFrame(FrameName.FileSize, value); }
         }
         
         public string Folder {
-            get {
-                return GetFrameString(FrameName.Folder);
-            }
+            get { return GetFrameString(FrameName.Folder); }
+            set { AddFrame(FrameName.Folder, value); }
         }
         
         public string Genre {
-            get {
-                return GetFrameString(FrameName.Genre);
-            }
+            get { return GetFrameString(FrameName.Genre); }
+            set { AddFrame(FrameName.Genre, value); }
         }
         
         public TimeSpan Duration {
-            get {
-                return new TimeSpan(GetFrameShort(FrameName.Length) * TimeSpan.TicksPerSecond);
-            }
+            get { return new TimeSpan(GetFrameShort(FrameName.Length) * TimeSpan.TicksPerSecond); }
+            set { AddFrame(FrameName.Length, (ushort)value.TotalSeconds); }
         }
         
         public bool IsProtected {
-            get {
-                return GetFrameShort(FrameName.Protected) != 0;
-            }
+            get { return GetFrameShort(FrameName.Protected) != 0; }
+            set { AddFrame(FrameName.Protected, (uint)(value == true ? 1 : 0)); }
         }
         
         public string Title {
-            get {
-                return GetFrameString(FrameName.Title);
-            }
+            get { return GetFrameString(FrameName.Title); }
+            set { AddFrame(FrameName.Title, value); }
         }
         
         public ushort TrackNumber {
-            get {
-                return GetFrameShort(FrameName.TrackNumber);
-            }
+            get { return GetFrameShort(FrameName.TrackNumber); }
+            set { AddFrame(FrameName.TrackNumber, value); }
         }
         
         public ushort Year {
-            get {
-                return GetFrameShort(FrameName.Year);
-            }
+            get { return GetFrameShort(FrameName.Year); }
+            set { AddFrame(FrameName.Year, value); }
         }
         
         public ICollection GetFrames()
@@ -270,5 +283,13 @@ namespace Njb
             
             return text.ToString();
         }
+    }
+    
+    public sealed class Codec
+    {
+        public static readonly string Mp3 = "MP3";
+        public static readonly string Wma = "WMA";
+        public static readonly string Wav = "WAV";
+        public static readonly string Audible = "AA";
     }
 }
