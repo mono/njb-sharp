@@ -1,5 +1,9 @@
 2006-04-13  Aaron Bockover  <aaron@abock.org>
 
+	* configure.ac: Bump to 0.3.0
+
+2006-04-13  Aaron Bockover  <aaron@abock.org>
+
 	* src/SongFrame.cs: Fixed frame creation
 	
 	* src/Device.cs: Fixed send track support; added DeleteSong support
