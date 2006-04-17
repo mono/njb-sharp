@@ -1,3 +1,10 @@
+2006-04-17  Aaron Bockover  <aaron@abock.org>
+
+	* src/NjbTest.cs: Added --hal-fdi-dump to generate HAL FDI entries for
+	all devices listed in DeviceId
+
+	* src/DeviceId.cs: Added support for storing input/output formats
+
 2006-04-13  Aaron Bockover  <aaron@abock.org>
 
 	* configure.ac: Bump to 0.3.0
