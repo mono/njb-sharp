@@ -1,16 +1,16 @@
-<Type Name="TransferProgressArgs" FullName="Njb.TransferProgressArgs">
-  <TypeSignature Language="C#" Value="public class TransferProgressArgs : System.EventArgs" />
+<Type Name="Codec" FullName="Njb.Codec">
+  <TypeSignature Language="C#" Value="public sealed class Codec" />
   <AssemblyInfo>
     <AssemblyName>njb-sharp</AssemblyName>
     <AssemblyVersion>0.3.0.23527</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>System.EventArgs</BaseTypeName>
+    <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TransferProgressArgs ();" />
+      <MemberSignature Language="C#" Value="public Codec ();" />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -18,33 +18,44 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Song">
-      <MemberSignature Language="C#" Value="public Njb.Song Song;" />
+    <Member MemberName="Mp3">
+      <MemberSignature Language="C#" Value="public static readonly string Mp3;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>Njb.Song</ReturnType>
+        <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Current">
-      <MemberSignature Language="C#" Value="public ulong Current;" />
+    <Member MemberName="Wma">
+      <MemberSignature Language="C#" Value="public static readonly string Wma;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>System.UInt64</ReturnType>
+        <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Total">
-      <MemberSignature Language="C#" Value="public ulong Total;" />
+    <Member MemberName="Wav">
+      <MemberSignature Language="C#" Value="public static readonly string Wav;" />
       <MemberType>Field</MemberType>
       <ReturnValue>
-        <ReturnType>System.UInt64</ReturnType>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Audible">
+      <MemberSignature Language="C#" Value="public static readonly string Audible;" />
+      <MemberType>Field</MemberType>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>

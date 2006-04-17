@@ -1,5 +1,20 @@
 2006-04-17  Aaron Bockover  <aaron@abock.org>
 
+	0.3.0 Release
+
+	* Makefile.am: 
+	* src/Makefile.am: Added MAINTAINERCLEANFILES
+
+	* src/*.{c,cs}: Updated copyright headers
+
+	* src/en/*: Updated monodoc documentation
+
+	* NEWS: Updated with release entry
+
+	* AUTHORS: Updated email address
+
+2006-04-17  Aaron Bockover  <aaron@abock.org>
+
 	* src/NjbTest.cs: Added --hal-fdi-dump to generate HAL FDI entries for
 	all devices listed in DeviceId
 

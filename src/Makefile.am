@@ -70,5 +70,7 @@ EXTRA_DIST = \
 	$(ASSEMBLY).config.in
 
 CLEANFILES = $(ASSEMBLY) $(TESTASM) *.mdb
-DISTCLEANFILES = Makefile.in njb-sharp-docs.zip njb-sharp-docs.tree
+DISTCLEANFILES = njb-sharp-docs.zip njb-sharp-docs.tree
+MAINTAINERCLEANFILES = Makefile.in
+
 

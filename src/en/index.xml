@@ -1,6 +1,6 @@
 <Overview>
   <Assemblies>
-    <Assembly Name="njb-sharp" Version="0.2.0.39756">
+    <Assembly Name="njb-sharp" Version="0.3.0.23527">
       <Attributes>
         <Attribute>
           <AttributeName>System.Reflection.AssemblyCompany(Company="Novell, Inc")</AttributeName>
@@ -34,6 +34,7 @@
       <Type Name="DataFile" />
       <Type Name="TransferProgressHandler" />
       <Type Name="DeviceId" />
+      <Type Name="Codec" />
     </Namespace>
   </Types>
   <Title>njb-sharp</Title>
