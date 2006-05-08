@@ -132,8 +132,15 @@ namespace Njb
             if(frame == null) {
                 return null;
             }
-            
-            return frame.DataString;
+
+            switch(frame.FrameType) {
+                case SongFrameType.UInt16:
+                    return Convert.ToString(frame.DataShort);
+                case SongFrameType.UInt32:
+                    return Convert.ToString(frame.DataInt);
+                default:
+                    return frame.DataString;
+            }
         }
         
         private ushort GetFrameShort(string label)
@@ -142,9 +149,16 @@ namespace Njb
             if(frame == null) {
                 return 0;
             }
-            
-            return frame.DataShort;
-        }
+                 
+            switch(frame.FrameType) {
+                case SongFrameType.String:
+                    return Convert.ToUInt16(frame.DataString);
+                case SongFrameType.UInt32:
+                    return (ushort)frame.DataInt;
+                default:
+                    return frame.DataShort;
+            }
+      }
         
         private uint GetFrameInt(string label)
         {
@@ -152,8 +166,15 @@ namespace Njb
             if(frame == null) {
                 return 0;
             }
-            
-            return frame.DataInt;
+             
+            switch(frame.FrameType) {
+                case SongFrameType.String:
+                    return Convert.ToUInt32(frame.DataString);
+                case SongFrameType.UInt16:
+                    return (uint)frame.DataShort;
+                default:
+                    return frame.DataInt;
+            }
         }
         
         private void AddFrame(SongFrame frame)
